@@ -1,17 +1,9 @@
 
-<%@page import="Dao.*"%>
-<%@page import="Model.*"%>
-<%@page import="java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
-<%
-User auth = (User) request.getSession().getAttribute("auth");
+<%User auth = (User) request.getSession().getAttribute("auth");
 if (auth != null) {
     request.setAttribute("person", auth);
-}
+} %>
 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +25,62 @@ height: 570px;
 padding-left:40px;
 
 }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'sans-serif';
+}
 
+
+body {
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.button{
+	
+	height:40px;
+	width:100px;
+	font-size: 1.3em;
+	position: relative;
+	background: transparent;
+	border: 2px solid #000;
+	border-radius: 10px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+	
+}
+.button:hover{
+	color:red;
+	height:40px;
+	width:100px;
+	font-size: 1.3em;
+	position: relative;
+	background: transparent;
+	border: 2px solid red;
+	border-radius: 10px;
+	
+}
+.Register{
+	font-size: 1em;
+	position: relative;
+	height: 550px;
+	width: 400px;
+	background: transparent;
+	border: 2px solid #000;
+	border-radius: 30px;
+	box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top:50%;
+
+}
 </style>
 </head>
 <body>
@@ -45,7 +92,7 @@ padding-left:40px;
 				<div class="heading1">
 					<h3 style="color:red">Registration Page</h3>
 				</div>
-
+              
 				<div>
 					<i class="fa-solid fa-user"></i> <input type="text" name="name"
 						id="name"><label for="name">Name</label>
@@ -94,8 +141,7 @@ padding-left:40px;
 				<br>
 				<div>
 					<i class="fa-solid fa-house"></i> <input type="number"
-						name="zipcode" id="zipcode"> <label for="zipcode">Zip
-						Code</label>
+						name="zipcode" id="zipcode"> <label for="zipcode">ZipCode</label>
 				</div>
 				<br>
 				<div>

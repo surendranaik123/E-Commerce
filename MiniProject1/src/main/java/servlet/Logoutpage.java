@@ -16,7 +16,7 @@ public class Logoutpage extends HttpServlet {
 			try {
 				if(request.getSession().getAttribute("auth")!=null) {
 					request.getSession().removeAttribute("auth");
-					response.sendRedirect("login.jsp");
+					response.sendRedirect("Loginpage.jsp");
 				}else {
 					response.sendRedirect("index.jsp");
 				}

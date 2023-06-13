@@ -1,11 +1,14 @@
 package Model;
+
+import java.sql.Connection;
+
 public class Order extends Product{
 	private int orderId;
 	private int uid;
 	private int qunatity;
 	private String date;
 	
-	public Order() {
+	public Order(Connection connection) {
 	}
 	
 	public Order(int orderId, int uid, int qunatity, String date) {

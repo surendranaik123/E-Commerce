@@ -20,18 +20,15 @@ public class Register extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		PrintWriter out = response.getWriter();
-
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String phone = request.getParameter("phone");
 		String gender = request.getParameter("gender");
-		String address = request.getParameter("address");
 		String language = request.getParameter("language");
+		String address = request.getParameter("address");
 		String zipcode = request.getParameter("zipcode");
-		String about = request.getParameter("about");
 
-	
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -39,23 +36,20 @@ public class Register extends HttpServlet {
 
 			System.out.println("connection done");
 
-			PreparedStatement ps = con.prepareStatement("insert into Registration values(?,?,?,?,?,?,?,?,?)");
-
+			PreparedStatement ps = con.prepareStatement("insert into userdata(name,email,password,phone,gender,language,address,zipcode) values(?,?,?,?,?,?,?,?)");
+			
 			ps.setString(1, name);
 			ps.setString(2, email);
 			ps.setString(3, password);
 			ps.setString(4, phone);
 			ps.setString(5, gender);
-			ps.setString(6, address);
-			ps.setString(7, language);
+			ps.setString(6, language);
+			ps.setString(7, address);
 			ps.setString(8, zipcode);
-			ps.setString(9, about);
-
 		   ps.executeUpdate();
 
 			if (ps.equals(ps)) {
-                   RequestDispatcher  requestDispatcher=(RequestDispatcher) request.getRequestDispatcher("");
-                    requestDispatcher.forward(request,response);
+				out.print("sucess");  
 				
 
 			} else {
@@ -66,8 +60,7 @@ public class Register extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			RequestDispatcher	requestDispatcher = request.getRequestDispatcher("failed.html");
-	               requestDispatcher.forward(request, response);
+			out.print("data insert failed");
 		}
 
 		out.close();

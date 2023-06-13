@@ -11,12 +11,14 @@ import javax.servlet.annotation.WebServlet;
 
 import Model.Cart;
 @WebServlet("/Inc_Dec_page")
+
+
 public class Inc_Dec_page extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		
 		try (PrintWriter out = response.getWriter()) {
 			String action = request.getParameter("action");
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -24,24 +26,30 @@ public class Inc_Dec_page extends HttpServlet {
 
 			if (action != null && id >= 1) {
 				if (action.equals("inc")) {
-					for(Cart c:cart_list) {
-						if (c.getId()==id) {
+					for (Cart c : cart_list) {
+						if (c.getId() == id) {
 							int quantity = c.getQuantity();
 							quantity++;
 							c.setQuantity(quantity);
 							response.sendRedirect("cart.jsp");
-							
 						}
-						out.print("Hello");
-						
 					}
-					
 				}
-			
+
+				if (action.equals("dec")) {
+					for (Cart c : cart_list) {
+						if (c.getId() == id && c.getQuantity() > 1) {
+							int quantity = c.getQuantity();
+							quantity--;
+							c.setQuantity(quantity);
+							break;
+						}
+					}
+					response.sendRedirect("cart.jsp");
+				}
 			} else {
-				out.print("Hello...........");	
+				response.sendRedirect("cart.jsp");
 			}
 		}
 	}
-
 }

@@ -7,6 +7,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
+User auth = (User) request.getSession().getAttribute("auth");
+if (auth != null) {
+    request.setAttribute("person", auth);
+}
+
 DecimalFormat dcf = new DecimalFormat("#.##");
 request.setAttribute("dcf", dcf);
 
@@ -16,6 +21,8 @@ if (cart_list != null) {
 	ProductDao pDao = new ProductDao(DbCon.getConnection());
 	cartProduct= pDao.getCartProducts(cart_list);
 	request.setAttribute("cart_list", cart_list);
+	double total = pDao.getTotalCartPrice(cart_list);
+	request.setAttribute("total", total);
 }
 %>
 
@@ -85,17 +92,17 @@ font-size: 25px;
 					<td><%=c.getCategory()%></td>
 					<td><%= dcf.format(c.getPrice())%></td>
 					<td>
-						<form action="order-now" method="post" class="form-inline">
+						<form action="Order_Page" method="get" class="form-inline">
 						<input type="hidden" name="id" value="<%= c.getId()%>" class="form-input">
 							<div class="form-group d-flex justify-content-between">
-								<a class="btn bnt-sm btn-incre" href="Inc_Dec_page?action=dec&id=<%=c.getId()%>"><i class="fas fa-plus-square"></i></a> 
+								<a class="btn bnt-sm btn-incre" href="Inc_Dec_page?action=inc&id=<%=c.getId()%>"><i class="fas fa-plus-square"></i></a> 
 								<input type="text" name="quantity" class="form-control"  value="<%=c.getQuantity()%>" readonly> 
 								<a class="btn btn-sm btn-decre" href="Inc_Dec_page?action=dec&id=<%=c.getId()%>"><i class="fas fa-minus-square"></i></a>
 							</div>
 							<button type="submit" class="btn btn-primary btn-sm">Buy</button>
 						</form>
 					</td>
-					<td><a href="remove-from-cart?id=<%=c.getId() %>" class="btn btn-sm btn-danger">Remove</a></td>
+					<td><a href="Product_Remove?id=<%=c.getId() %>" class="btn btn-sm btn-danger">Remove</a></td>
 				</tr>
 
 				<%

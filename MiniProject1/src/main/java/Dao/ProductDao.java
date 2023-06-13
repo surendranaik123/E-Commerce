@@ -7,6 +7,7 @@ import Model.Product;
 
 public class ProductDao {
 	private Connection con;
+	private String query;
     private PreparedStatement pst;
     private ResultSet rs;
     
@@ -72,13 +73,14 @@ public class ProductDao {
 
 	        return row;
 	    }
+	 */
 	
 	public double getTotalCartPrice(ArrayList<Cart> cartList) {
         double sum = 0;
         try {
             if (cartList.size() > 0) {
                 for (Cart item : cartList) {
-                    query = "select price from products where id=?";
+                  query = "select price from products where id=?";
                     pst = this.con.prepareStatement(query);
                     pst.setInt(1, item.getId());
                     rs = pst.executeQuery();
@@ -95,8 +97,7 @@ public class ProductDao {
         }
         return sum;
     }
-
-    */
+   
     public List<Cart> getCartProducts(ArrayList<Cart> cartList) throws ClassNotFoundException {
         List<Cart> book = new ArrayList<>();
         try {
