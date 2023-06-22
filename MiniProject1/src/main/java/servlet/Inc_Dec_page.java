@@ -22,9 +22,10 @@ public class Inc_Dec_page extends HttpServlet {
 		try (PrintWriter out = response.getWriter()) {
 			String action = request.getParameter("action");
 			int id = Integer.parseInt(request.getParameter("id"));
+			//String id =request.getParameter("id");
 			ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
 
-			if (action != null && id >= 1) {
+			if (action != null && id>=1) {
 				if (action.equals("inc")) {
 					for (Cart c : cart_list) {
 						if (c.getId() == id) {

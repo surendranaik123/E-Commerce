@@ -1,6 +1,7 @@
 package servlet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,21 +13,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import javax.servlet.annotation.WebServlet;
-@WebServlet("/Product_Manual")
-public class ProductManual extends HttpServlet {
+/**
+ * Servlet implementation class A
+ */
+public class A extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
 
 			System.out.println("connection done");
 
-			PreparedStatement ps = con.prepareStatement("insert into A(id,name,category,price,image) values(?,?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into NAME(id,name,category,price,image) values(?,?,?,?,?)");
 			/*ps.setInt(1, 1);
 			ps.setString(2, "New Arrival Men Shoes");
 			ps.setString(3, "Men Boots Shoe");
@@ -35,11 +36,12 @@ public class ProductManual extends HttpServlet {
 			ps.setBlob(5, fi1);*/
 
             ps.setString(1, "1");			
-			ps.setString(2, "Men Casual Shoes For Office");
+			ps.setString(2, "Men Casual Shoes");
 			ps.setString(3, "Men Casual Shoes");
 			ps.setDouble(4, 510.00);
-			InputStream fi2=new FileInputStream("E:/image/download (2).jpg");
-			ps.setBlob(5, fi2);
+			//ps.setString(5, "E:/image/download (2).jpg");
+		InputStream fi2=new FileInputStream("E:/image/download (2).jpg");
+		ps.setBlob(5, fi2);
 			
 			
 			/*ps.setInt(1, 3);
@@ -107,8 +109,7 @@ public class ProductManual extends HttpServlet {
 			
 	
 			ps.executeUpdate();
-			
-			System.out.println("image Upload");
+		
 			
 		} catch (Exception e) {
 

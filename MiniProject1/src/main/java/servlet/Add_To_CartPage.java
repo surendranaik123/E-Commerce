@@ -23,6 +23,7 @@ public class Add_To_CartPage extends HttpServlet {
 			ArrayList<Cart> cartList = new ArrayList<>();
 
 			 int id = Integer.parseInt(request.getParameter("id"));
+			//String id=request.getParameter("id"); 
 			Cart cm = new Cart();
 			cm.setId(id);
 			cm.setQuantity(1);

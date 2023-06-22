@@ -73,14 +73,14 @@ body {
 
 			<div class=" card w-100">
 
-				<img class="card-img-top" src="image/<%=p.getImage()%>"
+				<img class="card-img-top" src="image/download (2).jpg"
 					alt="Card image cap">
 				<h5 class="card-title">
 					Name:<%=p.getName()%></h5>
 				<h5 class="price">
-					Price:$<%=p.getPrice()%></h5>
+					Price:$<%=p.getPrice() %></h5>
 				<h6 class="category">
-					Category:<%=p.getCategory()%></h6>
+					Category:<%=p.getCategory() %></h6>
 				<div class="mt-3 d-flex justify-content-between">
 					<a class="btn btn-dark" href="Add_To_CartPage?id=<%=p.getId()%>">Add
 						to Cart</a> <a class="btn btn-primary" href="Order_Page">Buy Now</a>

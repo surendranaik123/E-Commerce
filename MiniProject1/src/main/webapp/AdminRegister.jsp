@@ -6,14 +6,11 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
-	<%
+<%
 User auth = (User) request.getSession().getAttribute("auth");
 if (auth != null) {
     request.setAttribute("person", auth);
-}
-%>
-
+}%>
 
 <!DOCTYPE html>
 <html>
@@ -24,59 +21,68 @@ if (auth != null) {
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <title>Admin Page</title>
 <style>
-.login {
-	margin-top: 10%;
+.register {
+margin-top:10%;
 	font-size: 1.3em;
 	border: 2px solid #000;
-	margin-left: 40%;
+	margin-left:40%;
 	height: 400px;
 	width: 450px;
-	border-radius: 30px;
+    border-radius: 30px;
 	box-shadow: 0 0 30px rgba(0, 0, 0, .5);
 	justify-content: center;
 	align-items: center;
-	padding-left: 50px;
+	padding-left: 30px;
 	padding-top: 20px;
+
 }
 
-.button {
-	height: 40px;
-	width: 100px;
+.button{
+	
+	height:40px;
+	width:100px;
 	font-size: 1.3em;
 	position: relative;
 	background: transparent;
 	border: 2px solid #000;
 	border-radius: 10px;
 	box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+	
 }
-
-.button:hover {
-	color: red;
-	height: 40px;
-	width: 100px;
+.button:hover{
+	color:red;
+	height:40px;
+	width:100px;
 	font-size: 1.3em;
 	position: relative;
 	background: transparent;
 	border: 2px solid red;
 	border-radius: 10px;
+	
+}
+.heading1 {
+color: red;
+font-size: 1.5em;
+padding-left: 50px;
 }
 
-.heading1 {
-	color: red;
-	font-size: 1.5em;
-	padding-left: 50px;
-}
+
 </style>
 </head>
 <body>
 <%@include file="/include/navbar.jsp" %>
-	<form method="get" action="/MiniProject1/AdminValidation">
+	<form method="post" action="AdminRegister">
 
-		<div class="login">
+		<div class="register">
 			<div class="heading">
 				<div class="heading1">
-					<h3>Admin Login Page</h3>
+					<h3>Admin Register Page</h3>
 				</div>
+				<div class="name">
+					<i class="fa-solid fa-envelope"></i> <input type="text"
+						placeholder="Enter AdminName" name="name"> <label>Admin Name</label>
+				</div>
+				<br>
 
 				<div class="email">
 					<i class="fa-solid fa-envelope"></i> <input type="text"
@@ -85,20 +91,16 @@ if (auth != null) {
 				<br>
 				<div class="">
 					<i class="fa-solid fa-lock"></i> <input type="password"
-						placeholder="**********" name="password"> <label>Password</label>
+						placeholder="********" name="password"> <label>Password</label>
 				</div>
 				<br>
-				<div class="remember-forgot ">
-					<input type="checkbox" checked="checked">Remember me<a
-						href="Forgotpassword.html">Forgot password?</a>
-				</div>
-				<br>
+			
 				<div>
-					<button class="button">Login</button>
+					<button class="button">Submit</button>
 				</div>
-				<br>
+                <br>
 				<p>
-					Don't have account?<a href="AdminRegister.jsp">Registration</a>
+					U have already account?<a href="Admin.jsp">Admin Login</a>
 				</p>
 				<br>
 			</div>

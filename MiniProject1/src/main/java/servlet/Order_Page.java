@@ -8,11 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import Model.Cart;
 import Model.Order;
 import Model.User;
-import connection.DbCon;
 
 @WebServlet("")
 public class Order_Page extends HttpServlet {
@@ -22,45 +23,41 @@ public class Order_Page extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
 			Date date = new Date();
 
 			User auth = (User) request.getSession().getAttribute("auth");
 
-		if (auth!=null) {
+			if (auth != null) {
+				String productId = request.getParameter("id");
+				// String productQuantity = request.getParameter("quantity");
 
-			String productId = request.getParameter("id");
-			
-			//int productQuantity = Integer.parseInt(request.getParameter("quantity"));
-			
-			String quantity = request.getParameter("quantity");
-	        int productQuantity = Integer.parseInt(quantity);
-			
-			if (productQuantity <= 0) {
-				productQuantity = 1;
-				
-			}
-			Order ordermodel = new Order(DbCon.getConnection());
-			ordermodel.setId(Integer.parseInt(productId));
-			ordermodel.setUid(auth.getId());  
-			ordermodel.setQunatity(productQuantity);
-			ordermodel.setDate(formatter.format(date));
+				int productQuantity = Integer.parseInt(request.getParameter("quantity"));
 
-			Dao.Order ordredao = new Dao.Order();
-			Boolean result = ordredao.insertOrder(ordermodel);
-			if (result) {
-				response.sendRedirect("order.jsp");
+				if (productQuantity <= 0) {
+					productQuantity = 1;
+				}
+				Order orderModel = new Order();
+				orderModel.setId(Integer.parseInt(productId));
+				orderModel.setUid(auth.getId());
+				orderModel.setQunatity(productQuantity);
+				orderModel.setDate(formatter.format(date));
+
+				Dao.Order orderDao = new Dao.Order();
+				boolean result = orderDao.insertOrder(orderModel);
+				if (result) {
+
+					out.println("order Sucess");
+				} else {
+					out.println("order failed");
+				}
 			} else {
-				out.print("order failed");
+				response.sendRedirect("Loginpage.jsp");
 			}
-		} else {
-			 response.sendRedirect("Loginpage.jsp");
-		}
 
-		}   catch (Exception e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 
 	}
 }

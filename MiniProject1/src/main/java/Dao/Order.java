@@ -1,24 +1,34 @@
 package Dao;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import org.apache.catalina.connector.Response;
 public class Order {
 	
 	public Boolean insertOrder(Model.Order ordermodel) throws ClassNotFoundException {
         boolean result = false;
+      
         try {
         
         	Class.forName("oracle.jdbc.driver.OracleDriver");
 	      Connection   con= (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
-        PreparedStatement pst=con.prepareStatement("insert into orders (p_id, u_id, o_quantity, o_date) values(?,?,?,?)");
-          Model.Order model1=new Model.Order(con);
-            pst.setInt(1, model1.getId());
-            pst.setInt(2, model1.getUid());
-            pst.setInt(3, model1.getQunatity());
+           PreparedStatement pst=con.prepareStatement("insert into orders (p_id, u_id, o_quantity, o_date) values(?,?,?,?)");
+         Model.Order model1=new Model.Order();
+          pst.setInt(1, model1.getId());
+          pst.setInt(2, model1.getUid());
+          pst.setInt(3, model1.getQunatity());
+    
             pst.setString(4, model1.getDate());
             pst.executeUpdate();
             result = true;
+            if (pst==model1) {
+				System.out.println("data insert");
+			} else {
+				System.out.println("data error");
+			}
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

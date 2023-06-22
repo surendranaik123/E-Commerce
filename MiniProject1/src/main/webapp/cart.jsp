@@ -88,7 +88,7 @@ font-size: 25px;
 					for (Cart c : cartProduct) {
 				%>
 				<tr>
-					<td><%=c.getName()%></td>
+					<td><%=c.getName() %></td>
 					<td><%=c.getCategory()%></td>
 					<td><%= dcf.format(c.getPrice())%></td>
 					<td>

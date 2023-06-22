@@ -2,6 +2,8 @@ package Model;
 
 import java.sql.Blob;
 
+import oracle.sql.BLOB;
+
 public class Product {
 	//private String id;
 	private int id;
@@ -9,12 +11,13 @@ public class Product {
 	private String category;
 	private Double price;
 	private Blob image;
+	//private String image;
 	
 
 	public Product() {
 	}
 	
-	public Product(int id, String name, String category, Double price, Blob image) {
+	public Product( int id, String name, String category, Double price, Blob image) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -23,14 +26,24 @@ public class Product {
 		this.image = image;
 	}
 
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
+	}*/
+	
+	
+	
 	public String getName() {
 		return name;
+	}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	public void setName(String name) {
 		this.name = name;

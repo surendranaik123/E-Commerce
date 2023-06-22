@@ -1,3 +1,4 @@
+
 <%@page import="Model.*"%>
 <!DOCTYPE html>
 <html>
@@ -19,8 +20,8 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'sans-serif';
-}
-
+} 
+ 
 header {
 	height: 10vh;
 	position: fixed;

@@ -25,13 +25,13 @@ public class ProductDao {
 		   con= (Connection) DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "system");
            System.out.print("connected");
 
-           pst = con.prepareStatement("select * from Shoes");
+           pst = con.prepareStatement("select * from shoes");
             rs = pst.executeQuery();
 
             while (rs.next()) {
             	Product row = new Product();
             	row.setId(rs.getInt("id"));
-               // row.setId(rs.getString("id"));
+              //  row.setId(rs.getString("id"));
                 row.setName(rs.getString("name"));
                 row.setCategory(rs.getString("category"));
                 row.setPrice(rs.getDouble("price"));
@@ -73,8 +73,8 @@ public class ProductDao {
 
 	        return row;
 	    }
+
 	 */
-	
 	public double getTotalCartPrice(ArrayList<Cart> cartList) {
         double sum = 0;
         try {
@@ -83,6 +83,7 @@ public class ProductDao {
                   query = "select price from products where id=?";
                     pst = this.con.prepareStatement(query);
                     pst.setInt(1, item.getId());
+                   // pst.setString(1, item.getId());
                     rs = pst.executeQuery();
                     while (rs.next()) {
                         sum+=rs.getDouble("price")*item.getQuantity();
@@ -97,7 +98,7 @@ public class ProductDao {
         }
         return sum;
     }
-   
+  
     public List<Cart> getCartProducts(ArrayList<Cart> cartList) throws ClassNotFoundException {
         List<Cart> book = new ArrayList<>();
         try {
@@ -108,11 +109,13 @@ public class ProductDao {
                       System.out.print("connected");
                       pst = con.prepareStatement("select * from Shoes where id=?");
                    
-                    pst.setInt(1, item.getId());
+                   // pst.setint(1, item.getId());
+                      pst.setInt(1, item.getId());
                     rs = pst.executeQuery();
                     while (rs.next()) {
                         Cart row = new Cart();
-                        row.setId(rs.getInt("id"));
+                      row.setId(rs.getInt("id"));
+                       // row.setId(rs.getString("id"));
                         row.setName(rs.getString("name"));
                         row.setCategory(rs.getString("category"));
                         row.setPrice(rs.getDouble("price")*item.getQuantity());
@@ -128,5 +131,5 @@ public class ProductDao {
             System.out.println(e.getMessage());
         }
         return book;
-    }
+    }	 
 }
